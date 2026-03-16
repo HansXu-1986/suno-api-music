@@ -1,50 +1,120 @@
 ---
 name: suno-api-music
-description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），自定义模式带完整元标签和歌词预览，基础功能完全免费
-version: 1.4.0
+description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），完全免费
+version: 1.6.0
 author: HansXu-1986
 license: MIT
 ---
 
 # 🎵 suno-api-music - Suno 全自动音乐生成技能
 
-基于 [suno.cn](https://suno.cn) MCP 服务 API 实现的全自动音乐生成，用户配置 API Key 即可直接生成音乐，**无需浏览器网页自动化**，更快更稳定。
+基于 [suno.cn](https://suno.cn) MCP 服务 API 实现的全自动音乐生成，**纯 API 调用，不需要网页自动化**，更快更稳定，完全免费使用。
 
 ## ✨ 特性
 
 - 🚀 **纯 API 生成** - 无需打开浏览器，直接调用 MCP API，速度快
-- 🎨 **两种生成模式**：
+- 🎨 **两种生成模式**:
   - **自动模式** - 一句话描述 → 直接生成，简单快捷
-  - **自定义模式** - 分步询问风格/乐器/曲风 → 确认后生成，精准控制
+  - **自定义模式** - 分步询问 → 预览确认 → 生成，精准控制
 - 🎯 **高度自定义** - 可指定风格、歌词、标题、生成数量、纯音乐
+- 📝 **预览确认** - 自定义模式生成歌词预览，带完整元标签和分段，确认后再生成
 - 🔑 **简单认证** - 使用 API Key 认证，不会过期（相比官网 Cookie）
 - 📝 **生成历史** - 保存用户生成记录
-- ⚡ **批量生成** - 打赏后支持一次生成多首不同版本
-- 💝 **基础完全免费** - 自愿打赏解锁批量生成
+- ⚡ **批量生成** - 支持一次生成最多 10 个不同版本
+- 🎁 **完全免费** - 所有功能全开，自愿赞赏
 
 ## When to use
 
 Use this skill when:
 
-1. User wants to generate music with Suno AI via suno.cn MCP API
-2. User has a suno.cn API Key
-3. User prefers API generation over browser automation (faster, more stable)
-4. User wants batch generation of multiple music versions
+1. You want to generate music with Suno AI via suno.cn MCP API
+2. You have a suno.cn API Key
+3. You prefer API generation over browser automation (faster, more stable)
+4. You want either quick auto generation or full custom control with preview
 
-**DO NOT use** if user explicitly asks for browser automation (this skill is API-only per user request).
+**DO NOT use** browser automation - this skill is pure API per explicit requirement.
+
+## 🎨 风格参考 (from suno.cn official guide)
+
+根据 suno.cn 官方指南，这里是常用风格参考：
+
+### 常见音乐风格分类
+
+**流行 Pop**
+- 流行民谣 Pop Folk
+- 流行摇滚 Pop Rock
+- synth-pop 合成器流行
+- power-pop 力量流行
+
+**摇滚 Rock**
+- 硬摇滚 Hard Rock
+- 另类摇滚 Alternative Rock
+- 英伦摇滚 Britpop
+- 朋克 Punk
+- 金属 Metal
+
+**民谣 Folk**
+- 美国民谣 American Folk
+- 现代民谣 Contemporary Folk
+- 民谣摇滚 Folk Rock
+- 乡村民谣 Country Folk
+
+**说唱 Rap/Hip Hop**
+- 东岸说唱 East Coast Rap
+- 西岸说唱 West Coast Rap
+- 嘻哈 Hip Hop
+- Trap
+
+**电子 Electronic**
+- 电子舞曲 EDM
+- 合成器 Synth
+- 氛围电子 Ambient
+- 科技舞曲 Techno
+
+**爵士 Jazz**
+- 冷爵士乐 Cool Jazz
+- 比波普 Bebop
+- 融合爵士 Fusion Jazz
+- 顺滑爵士 Smooth Jazz
+
+### 正确写法提示
+
+在歌词预览中使用官方标签格式：
+```
+[genre: 民谣]
+[style: 娓娓道来, 抒情走心]
+[instrument: 木吉他, 口琴, 轻鼓点]
+
+[verse]
+四十岁的清晨 闹钟响第三遍
+...
+
+[chorus]
+四十还在惑 未来是什么
+...
+```
 
 ## Instructions
 
 ### 🔐 First Time Setup
 
 1. **Get API Key from suno.cn**:
-   - User needs an account on https://suno.cn
-   - Get MCP SSE address and API Key from user
+   - You need an account on https://suno.cn
+   - Get MCP SSE address and API Key
    - Save configuration to `config.json`
 
-2. **Verify**:
-   - Test API connectivity
-   - If authentication fails, ask user to verify API Key
+2. **Configuration**:
+
+```json
+{
+  "sse_url": "https://mcp.suno.cn/mcp/sse",
+  "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
+  "default_versions": 2,
+  "timeout_ms": 120000
+}
+```
+
+That's it! No activation required, everything is free.
 
 ### 🎵 Generating Music
 
@@ -75,7 +145,7 @@ Step-by-step inquiry, you control every detail:
 5. We generate after confirmation
 
 - ✅ Full control over every detail
-- ✅ Complete preview with metadata before generation
+- ✅ Preview with complete metadata before generation
 - ✅ You can check and adjust before sending to Suno
 
 ### Flow:
@@ -114,52 +184,25 @@ Store in `config.json`:
 {
   "sse_url": "https://mcp.suno.cn/mcp/sse",
   "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
-  "pro_activation_code": "",         // 🔓 基础版：留空即可 → 免费使用，限制单首生成
-  "pro_activation_list_url": "",   // 👤 作者配置：公开激活码列表 Gist URL
   "default_versions": 2,
   "timeout_ms": 120000
 }
 ```
 
-**说明：**
-- **基础版用户**：只需要填 `api_key`，`pro_activation_code` 留空 → 免费使用，限制单首生成
-- **Pro 版用户**：付款后填入支付宝订单号 → 自动验证通过 → 解锁批量生成
-- **作者配置**：你只需要配置一次 `pro_activation_list_url` → 自动验证，不需要你手动处理
+## 💎 完全免费
 
-## Pricing
+**suno-api-music 完全免费，所有功能都可以用！**
 
-- 🎉 **完全免费** - 基础功能全部可用，单首生成无限制
-- 💝 **打赏解锁** - 打赏任意金额后激活批量生成（最多 10 首）
-- 打赏是自愿的，基础版完全够用，感谢你的支持！
+- ✅ 单首生成免费
+- ✅ 批量生成免费（最多 10 首）
+- ✅ 自定义模式免费
+- ✅ 所有功能全开
 
-## 💰 支持开发
+如果你觉得这个技能好用，欢迎扫码赞赏支持开发 👇
 
-如果你觉得这个技能好用，欢迎打赏支持开发👇
+![支付宝赞赏码](https://pcsdata.baidu.com/thumbnail/0105b65d3hc459885de5ae19b517cfa7?fid=843748537-16051585-645516420529129&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-2sh4WyLvEGJkEXw3S2lFgGSAX8M%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=575398625919898124&dp-callid=0&time=1773633600&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video)
 
-![支付宝赞赏码]($https://pcsdata.baidu.com/thumbnail/0105b65d3hc459885de5ae19b517cfa7?fid=843748537-16051585-645516420529129&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-2sh4WyLvEGJkEXw3S2lFgGSAX8M%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=575398625919898124&dp-callid=0&time=1773633600&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video)
-
-### 💝 打赏用户福利
-
-打赏任意金额后，可以：
-- 解锁**批量生成**功能（最多 10 首同时生成）
-- 获得优先级问题支持
-
-**激活方式：**
-1. 扫码打赏
-2. 复制支付宝订单号
-3. 在 `config.json` 中添加：
-   ```json
-   {
-     "sse_url": "https://mcp.suno.cn/mcp/sse",
-     "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
-     "pro_activation_code": "你的订单号",
-     "default_versions": 5,
-     "timeout_ms": 120000
-   }
-   ```
-4. ✅ 激活成功！批量生成功能已解锁
-
-> 激活码自动验证，订单号在 Gist 列表中就能激活，作者添加后自动生效
+感谢你的支持！
 
 ## 💬 反馈与建议
 
@@ -170,57 +213,26 @@ Store in `config.json`:
 
 感谢你的反馈，帮助我们变得更好 🙏
 
-## ⚙️ Pro 激活验证
-
-**`suno-api-music` 内置自动验证功能，不需要依赖外部技能**
-
-激活码验证原理：
-- 作者维护一个**公开的已付款激活码列表**（放在 GitHub Gist，公开可访问）
-- 用户填入激活码后，技能自动拉取列表，检查激活码是否有效
-- 如果激活码在列表中 → ✅ 解锁 Pro 功能，支持批量生成（最多 10 首）
-- 如果激活码不在列表中 / 为空 → ❌ 只能单首生成（基础版免费）
-
-### 👤 用户操作步骤：
-1. 扫描下方赞赏码付款 9.9 元
-2. 复制支付宝订单号
-3. 在 `config.json` 中添加：
-   ```json
-   "pro_activation_code": "你的订单号"
-   ```
-4. **自动验证** → 通过即解锁 Pro ✅
-
-### 👨‍💻 作者操作方式
-
-#### 选项一：半自动（推荐，不需要服务器，最简单）
-1. 用户付款后，你支付宝收到推送通知
-2. 在 OpenClaw 说一句话：
-   ```
-   alipay-auto-activate 添加激活码 订单号
-   ```
-3. ✅ **自动完成** → 订单号添加到 Gist，用户立即可用
-4. 全程不需要你有服务器，只需要一句话，10 秒钟搞定
-
-#### 选项二：全自动（需要服务器，完全不用管）
-如果你有自己的服务器，可以部署 Webhook 实现**真正全自动**：
-
-1. 部署 `webhook_server.py` 到你的服务器（或 Vercel/Render 免费托管）
-2. 在支付宝商家平台配置异步通知 URL：`https://your-server.com/webhook/alipay`
-3. 配置 `webhook_config.json` 填入你的 GitHub token、Gist ID、支付宝公钥
-4. ✅ **完成** → 用户付款后，支付宝自动发通知 → 自动添加订单号到 Gist → 用户激活
-5. **全程不需要你操作**，躺着收款就行
-
-部署说明看 `webhook_server.py` 和 `requirements-webhook.txt`
-
-> 使用 `alipay-auto-activate` 技能管理激活列表，两种方式都可以，选适合你的！
-
 ## Changelog
+
+### 1.6.0 (2026-03-16)
+- ✨ **Advanced lyric generation with per-line detailed tagging**:
+- ✨ Each lyric line gets automatic emotion/pace/vocal tags based on content
+- ✨ Full metadata tagging: global + per-line for maximum richness
+- ✨ Follows suno.cn official prompt specification exactly
+- ✨ Generates deeply textured prompts that Suno can understand perfectly
+
+### 1.5.0 (2026-03-16)
+- 🎉 Completely free - all features unlocked, no activation required
+- ✨ Removed activation verification, everyone can use batch generation for free
+- ✨ All functions are available for free, donation is voluntary
 
 ### 1.4.0 (2026-03-16)
 - ✨ **Complete preview for custom mode**:
-  - ✨ Generate lyrics preview with metadata tags before generation
-  - ✨ Add `[title] [genre] [instrument]` meta tags
-  - ✨ Add `[verse] [chorus] [outro]` section tags for lyrics
-  - ✨ User can preview everything before confirming generation
+- ✨ Generate lyrics preview with metadata tags before generation
+- ✨ Add `[title] [genre] [instrument]` meta tags
+- ✨ Add `[verse] [chorus] [outro]` section tags for lyrics
+- ✨ User can preview everything before confirming generation
 
 ### 1.3.0 (2026-03-16)
 - ✨ **Add two generation modes**:
@@ -233,39 +245,12 @@ Store in `config.json`:
 - 💝 All core features are free, donation is voluntary
 - Keep automatic activation verification for donation users
 
-### 1.1.1 (2026-03-16)
-- ✨ Add optional full automatic webhook server for zero-configuration activation
-- ✨ Support both semi-auto (no server) and full-auto (with server)
-
 ### 1.1.0 (2026-03-16)
 - ✨ **Integrated automatic Pro activation directly in the skill**
 - ✨ Add `pro_activation.py` with built-in verification function
 - ✨ Users fill order number in config → skill auto-verify from Gist → unlock Pro
 - ✨ Use `alipay-auto-activate` for easy activation code management (no server needed)
 - ✅ `pro_activation_list_url` pre-configured with your Gist
-
-### 1.0.5 (2026-03-16)
-- ✨ Add automatic Pro activation with public Gist verification
-- ✨ Add strict activation code checking
-- Add alipay-auto-activate integration
-
-### 1.0.4 (2026-03-16)
-- ✨ Fix: pro_activation_code is optional, base version doesn't require payment
-- 🐛 Fix configuration example
-
-### 1.0.3 (2026-03-16)
-- ✨ Add strict pro activation verification with public gist list
-- ✨ Automatic validation
-
-### 1.0.2 (2026-03-16)
-- ✨ Add automatic Pro activation - user adds activation code in config.json → auto unlock Pro
-- ✨ Add `pro_activation_code` field to config.json
-- Add feedback section powered by feedback-collector
-- Users can report issues easily via GitHub Issues
-
-### 1.0.1 (2026-03-16)
-- Add feedback section powered by feedback-collector
-- Users can report issues easily via GitHub Issues
 
 ### 1.0.0 (2026-03-16)
 - Initial release
