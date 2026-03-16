@@ -1,7 +1,7 @@
 ---
 name: suno-api-music
-description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），基础功能完全免费
-version: 1.3.0
+description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），自定义模式带完整元标签和歌词预览，基础功能完全免费
+version: 1.4.0
 author: HansXu-1986
 license: MIT
 ---
@@ -67,11 +67,16 @@ Step-by-step inquiry, you control every detail:
    - Full lyrics (optional)
    - Instrumental only?
    - Number of versions
-3. You confirm all information
-4. We generate after confirmation
+3. We **generate full preview**:
+   - Complete metadata tags: `[title] [genre] [instrument]`
+   - Lyrics preview with `[verse]/[chorus]/[outro]` section tags
+   - You see everything before generating
+4. You confirm all information
+5. We generate after confirmation
 
 - ✅ Full control over every detail
-- ✅ Preview before generation
+- ✅ Complete preview with metadata before generation
+- ✅ You can check and adjust before sending to Suno
 
 ### Flow:
 
@@ -209,6 +214,13 @@ Store in `config.json`:
 > 使用 `alipay-auto-activate` 技能管理激活列表，两种方式都可以，选适合你的！
 
 ## Changelog
+
+### 1.4.0 (2026-03-16)
+- ✨ **Complete preview for custom mode**:
+  - ✨ Generate lyrics preview with metadata tags before generation
+  - ✨ Add `[title] [genre] [instrument]` meta tags
+  - ✨ Add `[verse] [chorus] [outro]` section tags for lyrics
+  - ✨ User can preview everything before confirming generation
 
 ### 1.3.0 (2026-03-16)
 - ✨ **Add two generation modes**:
