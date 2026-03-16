@@ -1,7 +1,7 @@
 ---
 name: suno-api-music
-description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，内置自动 Pro 激活验证
-version: 1.1.0
+description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，基础功能完全免费
+version: 1.2.0
 author: HansXu-1986
 license: MIT
 ---
@@ -99,40 +99,38 @@ Store in `config.json`:
 
 ## Pricing
 
-- 🔓 **Base**: Free - Single song generation, basic features
-- ⭐ **Pro**: One-time 9.9 CNY - Batch generation, unlimited uses, priority support
+- 🎉 **完全免费** - 基础功能全部可用，单首生成无限制
+- 💝 **打赏解锁** - 打赏任意金额后激活批量生成（最多 10 首）
+- 打赏是自愿的，基础版完全够用，感谢你的支持！
 
-## 💰 版本与授权
+## 💰 支持开发
 
-| 版本 | 功能 | 价格 |
-|------|------|------|
-| 🔓 **基础版** | 单首音乐生成，完整功能 | 免费 |
-| ⭐ **Pro 版** | 无限生成 + 批量生成 + 优先级支持 | **9.9 元 一次性授权** |
+如果你觉得这个技能好用，欢迎打赏支持开发👇
 
-## ✨ 激活 Pro 版
-
-1. 扫描下方赞赏码付款 9.9 元
 ![支付宝赞赏码]($https://pcsdata.baidu.com/thumbnail/0105b65d3hc459885de5ae19b517cfa7?fid=843748537-16051585-645516420529129&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-2sh4WyLvEGJkEXw3S2lFgGSAX8M%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=575398625919898124&dp-callid=0&time=1773633600&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video)
 
-2. 付款后**自动获取激活码**
-   - 支付宝付款成功后会显示激活码
-   - 或者复制订单号作为激活码
+### 💝 打赏用户福利
 
-3. 在 `config.json` 中添加一行：
+打赏任意金额后，可以：
+- 解锁**批量生成**功能（最多 10 首同时生成）
+- 获得优先级问题支持
+
+**激活方式：**
+1. 扫码打赏
+2. 复制支付宝订单号
+3. 在 `config.json` 中添加：
    ```json
    {
      "sse_url": "https://mcp.suno.cn/mcp/sse",
      "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
-     "pro_activation_code": "your-activation-code",
+     "pro_activation_code": "你的订单号",
      "default_versions": 5,
      "timeout_ms": 120000
    }
    ```
+4. ✅ 激活成功！批量生成功能已解锁
 
-4. 激活成功！现在 `default_versions` 可以设置为 5，默认生成 5 个版本 🎉
-
-> 激活码验证：技能内部会自动检查激活码，如果有效就解锁 Pro 功能
-> 支付宝付款成功后**订单号就是激活码**，**自动激活，不需要等待作者回复**
+> 激活码自动验证，订单号在 Gist 列表中就能激活，作者添加后自动生效
 
 ## 💬 反馈与建议
 
@@ -187,6 +185,15 @@ Store in `config.json`:
 > 使用 `alipay-auto-activate` 技能管理激活列表，两种方式都可以，选适合你的！
 
 ## Changelog
+
+### 1.2.0 (2026-03-16)
+- 🎉 Changed to donation model: base version is fully free, donation unlocks batch generation
+- 💝 All core features are free, donation is voluntary
+- Keep automatic activation verification for donation users
+
+### 1.1.1 (2026-03-16)
+- ✨ Add optional full automatic webhook server for zero-configuration activation
+- ✨ Support both semi-auto (no server) and full-auto (with server)
 
 ### 1.1.0 (2026-03-16)
 - ✨ **Integrated automatic Pro activation directly in the skill**
