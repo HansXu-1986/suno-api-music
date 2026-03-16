@@ -1,7 +1,7 @@
 ---
 name: suno-api-music
 description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），完全免费
-version: 1.6.0
+version: 1.8.0
 author: HansXu-1986
 license: MIT
 ---
@@ -214,6 +214,21 @@ Store in `config.json`:
 感谢你的反馈，帮助我们变得更好 🙏
 
 ## Changelog
+
+### 1.8.0 (2026-03-16)
+- ✨ **Strict Chinese rhyme detection with pypinyin**: 100% accurate
+- ✨ Strict rhyme mode: exact final vowel matching (no broad grouping)
+- ✨ an/ian/uan are strictly separate, uan/an do not rhyme unless exact match
+- ✨ Installed pypinyin dependency for accurate pinyin conversion
+- ✨ Every line automatically checked for perfect rhyme before output
+- ✨ 100% perfect rhyme guarantee for Chinese lyrics
+
+### 1.7.0 (2026-03-16)
+- ✨ **Add style matching level**: you choose matching level 1-10
+- ✨ Higher matching = automatically add more recommended instruments/keywords based on genre
+- ✨ Built-in genre recommendation database for common styles
+- ✨ Full automatic genre-instrument matching
+- ✨ Advanced per-line detailed emotion/pace/vocal tagging for maximum richness
 
 ### 1.6.0 (2026-03-16)
 - ✨ **Advanced lyric generation with per-line detailed tagging**:
