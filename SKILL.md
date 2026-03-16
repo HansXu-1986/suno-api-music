@@ -1,7 +1,7 @@
 ---
 name: suno-api-music
-description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，基础功能完全免费
-version: 1.2.0
+description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，两种生成模式（自动一句话/自定义分步），基础功能完全免费
+version: 1.3.0
 author: HansXu-1986
 license: MIT
 ---
@@ -13,10 +13,14 @@ license: MIT
 ## ✨ 特性
 
 - 🚀 **纯 API 生成** - 无需打开浏览器，直接调用 MCP API，速度快
-- 🎨 **支持自定义** - 可指定风格、歌词、标题、生成数量
+- 🎨 **两种生成模式**：
+  - **自动模式** - 一句话描述 → 直接生成，简单快捷
+  - **自定义模式** - 分步询问风格/乐器/曲风 → 确认后生成，精准控制
+- 🎯 **高度自定义** - 可指定风格、歌词、标题、生成数量、纯音乐
 - 🔑 **简单认证** - 使用 API Key 认证，不会过期（相比官网 Cookie）
 - 📝 **生成历史** - 保存用户生成记录
-- ⚡ **批量生成** - 支持一次生成多首不同版本
+- ⚡ **批量生成** - 打赏后支持一次生成多首不同版本
+- 💝 **基础完全免费** - 自愿打赏解锁批量生成
 
 ## When to use
 
@@ -44,27 +48,47 @@ Use this skill when:
 
 ### 🎵 Generating Music
 
-Flow:
+Two generation modes:
 
-1. **Get user requirements**:
-   - Prompt/lyrics - Describe the song you want (required)
-   - Style/genre (optional, e.g., "中国风RAP", "pop ballad", "rock")
-   - Title (optional)
-   - Number of versions to generate (default: 2)
+#### 1. 🚀 Auto Mode (Recommended)
+Just describe what song you want in one sentence, we generate directly:
+> "帮我生成一首轻快的民谣，主题：春天花开"
 
-2. **Call MCP API**:
+- ✅ Simple and fast
+- ✅ AI handles everything automatically
+
+#### 2. 🎨 Custom Mode (Full control)
+Step-by-step inquiry, you control every detail:
+1. You say "custom mode" or "自定义模式"
+2. We ask you step by step:
+   - Theme/lyrics
+   - Style/genre
+   - Title
+   - Full lyrics (optional)
+   - Instrumental only?
+   - Number of versions
+3. You confirm all information
+4. We generate after confirmation
+
+- ✅ Full control over every detail
+- ✅ Preview before generation
+
+### Flow:
+
+After you confirm all parameters:
+
+1. **Call MCP API**:
    - Endpoint: SSE `https://mcp.suno.cn/mcp/sse`
    - Authentication: `Authorization: Bearer {api-key}`
    - Send generate music request through MCP protocol
 
-3. **Wait for completion**:
+2. **Wait for completion**:
    - Listen to SSE events for progress
    - Get audio URLs once completed
 
-4. **Return result**:
+3. **Return result**:
    - Show generated music links/download URLs
    - Add to generation history
-   - Ask if user wants to regenerate with different parameters
 
 ### ⚠️ Error Handling
 
@@ -185,6 +209,12 @@ Store in `config.json`:
 > 使用 `alipay-auto-activate` 技能管理激活列表，两种方式都可以，选适合你的！
 
 ## Changelog
+
+### 1.3.0 (2026-03-16)
+- ✨ **Add two generation modes**:
+  - 🚀 Auto mode: one sentence → generate directly, simple and fast
+  - 🎨 Custom mode: step-by-step inquiry, confirm before generation, full control
+- ✨ User can choose mode freely, better user experience
 
 ### 1.2.0 (2026-03-16)
 - 🎉 Changed to donation model: base version is fully free, donation unlocks batch generation
