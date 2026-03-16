@@ -85,10 +85,17 @@ Store in `config.json`:
 {
   "sse_url": "https://mcp.suno.cn/mcp/sse",
   "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
+  "pro_activation_code": "",         // 🔓 基础版：留空即可 → 免费使用，限制单首生成
+  "pro_activation_list_url": "",   // 👤 作者配置：公开激活码列表 Gist URL
   "default_versions": 2,
   "timeout_ms": 120000
 }
 ```
+
+**说明：**
+- **基础版用户**：只需要填 `api_key`，`pro_activation_code` 留空 → 免费使用，限制单首生成
+- **Pro 版用户**：付款后填入支付宝订单号 → 自动验证通过 → 解锁批量生成
+- **作者配置**：你只需要配置一次 `pro_activation_list_url` → 自动验证，不需要你手动处理
 
 ## Pricing
 
