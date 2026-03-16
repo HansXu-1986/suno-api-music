@@ -2,7 +2,7 @@
 name: suno-api-music
 description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作
 version: 1.0.0
-author: your-name
+author: HansXu-1986
 license: MIT
 ---
 
@@ -94,6 +94,16 @@ Store in `config.json`:
 
 - 🔓 **Base**: Free - Single song generation, basic features
 - ⭐ **Pro**: One-time 9.9 CNY - Batch generation, unlimited uses, priority support
+
+## 💰 支持开发
+
+如果你觉得这个技能好用，欢迎打赏支持开发👇
+
+![支付宝赞赏码]($https://pcsdata.baidu.com/thumbnail/0105b65d3hc459885de5ae19b517cfa7?fid=843748537-16051585-645516420529129&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-2sh4WyLvEGJkEXw3S2lFgGSAX8M%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=575398625919898124&dp-callid=0&time=1773633600&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video)
+
+- 🔓 **基础功能完全免费**，单首生成无限制
+- ⭐ **打赏 9.9 元** 即可获得 Pro 授权，解锁批量生成和优先级问题解答
+- 打赏后请在 GitHub 提 Issue 或者私信作者激活
 
 ## Changelog
 
