@@ -95,15 +95,37 @@ Store in `config.json`:
 - 🔓 **Base**: Free - Single song generation, basic features
 - ⭐ **Pro**: One-time 9.9 CNY - Batch generation, unlimited uses, priority support
 
-## 💰 支持开发
+## 💰 版本与授权
 
-如果你觉得这个技能好用，欢迎打赏支持开发👇
+| 版本 | 功能 | 价格 |
+|------|------|------|
+| 🔓 **基础版** | 单首音乐生成，完整功能 | 免费 |
+| ⭐ **Pro 版** | 无限生成 + 批量生成 + 优先级支持 | **9.9 元 一次性授权** |
 
+## ✨ 激活 Pro 版
+
+1. 扫描下方赞赏码付款 9.9 元
 ![支付宝赞赏码]($https://pcsdata.baidu.com/thumbnail/0105b65d3hc459885de5ae19b517cfa7?fid=843748537-16051585-645516420529129&rt=pr&sign=FDTAER-yUdy3dSFZ0SVxtzShv1zcMqd-2sh4WyLvEGJkEXw3S2lFgGSAX8M%3D&expires=2h&chkv=0&chkbd=0&chkpc=&dp-logid=575398625919898124&dp-callid=0&time=1773633600&bus_no=26&size=c1600_u1600&quality=100&vuk=-&ft=video)
 
-- 🔓 **基础功能完全免费**，单首生成无限制
-- ⭐ **打赏 9.9 元** 即可获得 Pro 授权，解锁批量生成和优先级问题解答
-- 打赏后请在 GitHub 提 Issue 或者私信作者激活
+2. 付款后**自动获取激活码**
+   - 支付宝付款成功后会显示激活码
+   - 或者复制订单号作为激活码
+
+3. 在 `config.json` 中添加一行：
+   ```json
+   {
+     "sse_url": "https://mcp.suno.cn/mcp/sse",
+     "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
+     "pro_activation_code": "your-activation-code",
+     "default_versions": 5,
+     "timeout_ms": 120000
+   }
+   ```
+
+4. 激活成功！现在 `default_versions` 可以设置为 5，默认生成 5 个版本 🎉
+
+> 激活码验证：技能内部会自动检查激活码，如果有效就解锁 Pro 功能
+> 支付宝付款成功后**订单号就是激活码**，**自动激活，不需要等待作者回复**
 
 ## 💬 反馈与建议
 
@@ -111,11 +133,24 @@ Store in `config.json`:
 
 - 🐛 **问题报告**: [点击这里报告 Bug](https://github.com/HansXu-1986/suno-api-music/issues/new)
 - 💡 **功能建议**: [点击这里提建议](https://github.com/HansXu-1986/suno-api-music/issues/new)
-- ☕ **支持开发**: 扫码赞赏支持（在上文）
 
 感谢你的反馈，帮助我们变得更好 🙏
 
+## ⚙️ Pro 激活验证
+
+技能会自动读取 `config.json` 中的 `pro_activation_code`：
+
+- 如果激活码有效（匹配订单号格式且已付款），`default_versions` 最大可以设为 10，支持批量生成
+- 如果激活码为空，`default_versions` 最大为 1，只能单首生成
+- 支付宝付款成功后订单号就是激活码，**自动激活，不需要等待作者审核**
+
 ## Changelog
+
+### 1.0.2 (2026-03-16)
+- ✨ Add automatic Pro activation - user adds activation code in config.json → auto unlock Pro
+- ✨ Add `pro_activation_code` field to config.json
+- Add feedback section powered by feedback-collector
+- Users can report issues easily via GitHub Issues
 
 ### 1.0.1 (2026-03-16)
 - Add feedback section powered by feedback-collector
