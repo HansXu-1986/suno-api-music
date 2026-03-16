@@ -105,7 +105,21 @@ Store in `config.json`:
 - ⭐ **打赏 9.9 元** 即可获得 Pro 授权，解锁批量生成和优先级问题解答
 - 打赏后请在 GitHub 提 Issue 或者私信作者激活
 
+## 💬 反馈与建议
+
+如果你使用中遇到问题，或者有好的建议，欢迎反馈：
+
+- 🐛 **问题报告**: [点击这里报告 Bug](https://github.com/HansXu-1986/suno-api-music/issues/new)
+- 💡 **功能建议**: [点击这里提建议](https://github.com/HansXu-1986/suno-api-music/issues/new)
+- ☕ **支持开发**: 扫码赞赏支持（在上文）
+
+感谢你的反馈，帮助我们变得更好 🙏
+
 ## Changelog
+
+### 1.0.1 (2026-03-16)
+- Add feedback section powered by feedback-collector
+- Users can report issues easily via GitHub Issues
 
 ### 1.0.0 (2026-03-16)
 - Initial release
