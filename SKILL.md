@@ -162,16 +162,29 @@ Store in `config.json`:
    ```
 4. **自动验证** → 通过即解锁 Pro ✅
 
-### 👨‍💻 作者操作步骤（使用 `alipay-auto-activate`）：
-1. 用户付款后，你收到支付宝通知
+### 👨‍💻 作者操作方式
+
+#### 选项一：半自动（推荐，不需要服务器，最简单）
+1. 用户付款后，你支付宝收到推送通知
 2. 在 OpenClaw 说一句话：
    ```
    alipay-auto-activate 添加激活码 订单号
    ```
 3. ✅ **自动完成** → 订单号添加到 Gist，用户立即可用
-4. 全程不需要服务器，只需要一句话
+4. 全程不需要你有服务器，只需要一句话，10 秒钟搞定
 
-> 使用 `alipay-auto-activate` 技能管理激活列表，无需服务器，一键添加
+#### 选项二：全自动（需要服务器，完全不用管）
+如果你有自己的服务器，可以部署 Webhook 实现**真正全自动**：
+
+1. 部署 `webhook_server.py` 到你的服务器（或 Vercel/Render 免费托管）
+2. 在支付宝商家平台配置异步通知 URL：`https://your-server.com/webhook/alipay`
+3. 配置 `webhook_config.json` 填入你的 GitHub token、Gist ID、支付宝公钥
+4. ✅ **完成** → 用户付款后，支付宝自动发通知 → 自动添加订单号到 Gist → 用户激活
+5. **全程不需要你操作**，躺着收款就行
+
+部署说明看 `webhook_server.py` 和 `requirements-webhook.txt`
+
+> 使用 `alipay-auto-activate` 技能管理激活列表，两种方式都可以，选适合你的！
 
 ## Changelog
 
