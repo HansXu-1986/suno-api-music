@@ -1,7 +1,7 @@
 ---
 name: suno-api-music
-description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作
-version: 1.0.0
+description: 基于 Suno.cn MCP 服务的全自动音乐生成，支持歌词、风格定制，通过 API 直接生成，无需网页操作，内置自动 Pro 激活验证
+version: 1.1.0
 author: HansXu-1986
 license: MIT
 ---
@@ -145,29 +145,55 @@ Store in `config.json`:
 
 ## ⚙️ Pro 激活验证
 
+**`suno-api-music` 内置自动验证功能，不需要依赖外部技能**
+
 激活码验证原理：
 - 作者维护一个**公开的已付款激活码列表**（放在 GitHub Gist，公开可访问）
-- 技能启动时自动拉取列表，检查用户提供的激活码是否在列表中
+- 用户填入激活码后，技能自动拉取列表，检查激活码是否有效
 - 如果激活码在列表中 → ✅ 解锁 Pro 功能，支持批量生成（最多 10 首）
-- 如果激活码不在列表中 / 为空 → ❌ 只能单首生成
+- 如果激活码不在列表中 / 为空 → ❌ 只能单首生成（基础版免费）
 
-**用户操作步骤**：
-1. 扫描赞赏码付款 9.9 元
+### 👤 用户操作步骤：
+1. 扫描下方赞赏码付款 9.9 元
 2. 复制支付宝订单号
-3. 在 `config.json` 中添加 `"pro_activation_code": "订单号"`
-4. 技能自动验证 → 通过即解锁 Pro
+3. 在 `config.json` 中添加：
+   ```json
+   "pro_activation_code": "你的订单号"
+   ```
+4. **自动验证** → 通过即解锁 Pro ✅
 
-**作者操作步骤**：
-### ✨ 全自动方式（推荐）
-1. 在支付宝商家服务中配置**异步通知 Webhook**
-2. Webhook 自动触发技能更新 → 自动将订单号添加到 Gist
-3. **全程不需要你操作**，用户付款后几分钟就自动激活了 🥳
+### 👨‍💻 作者操作步骤（使用 `alipay-auto-activate`）：
+1. 用户付款后，你收到支付宝通知
+2. 在 OpenClaw 说一句话：
+   ```
+   alipay-auto-activate 添加激活码 订单号
+   ```
+3. ✅ **自动完成** → 订单号添加到 Gist，用户立即可用
+4. 全程不需要服务器，只需要一句话
 
-### 👋 手动方式
-1. 收到付款后，把订单号添加到你的公开激活码列表 Gist
-2. 技能自动拉取最新列表，无需修改代码，完成 ✅
+> 使用 `alipay-auto-activate` 技能管理激活列表，无需服务器，一键添加
 
 ## Changelog
+
+### 1.1.0 (2026-03-16)
+- ✨ **Integrated automatic Pro activation directly in the skill**
+- ✨ Add `pro_activation.py` with built-in verification function
+- ✨ Users fill order number in config → skill auto-verify from Gist → unlock Pro
+- ✨ Use `alipay-auto-activate` for easy activation code management (no server needed)
+- ✅ `pro_activation_list_url` pre-configured with your Gist
+
+### 1.0.5 (2026-03-16)
+- ✨ Add automatic Pro activation with public Gist verification
+- ✨ Add strict activation code checking
+- Add alipay-auto-activate integration
+
+### 1.0.4 (2026-03-16)
+- ✨ Fix: pro_activation_code is optional, base version doesn't require payment
+- 🐛 Fix configuration example
+
+### 1.0.3 (2026-03-16)
+- ✨ Add strict pro activation verification with public gist list
+- ✨ Automatic validation
 
 ### 1.0.2 (2026-03-16)
 - ✨ Add automatic Pro activation - user adds activation code in config.json → auto unlock Pro
